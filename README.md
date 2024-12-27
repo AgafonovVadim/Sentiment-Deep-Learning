@@ -1,70 +1,121 @@
-# Sentiment Analysis Deep Learning Model
+# Sentiment Analysis Using LSTM
 
-## Description
-This repository contains the implementation of a deep learning model designed to classify textual reviews into positive and negative categories. The project aims to provide an intuitive and efficient sentiment analysis solution that can be applied in various domains, such as customer feedback analysis, social media monitoring, and text analysis automation.
+## Project Description  
+This project implements a **Sentiment Analysis Model** using **TensorFlow** to classify movie reviews as positive or negative. The model is designed with simplicity and efficiency in mind, leveraging layers such as `Embedding`, `LSTM`, and `Dense`. By utilizing GPU acceleration, the training process is optimized for faster computation. 
 
-## Key Features
-- **Dataset Preparation:** Collect and preprocess datasets suitable for sentiment analysis (e.g., IMDB, Amazon Reviews).
-- **Label Creation:** For datasets without existing labels, generate labels using Large Language Models (LLMs) by providing a detailed task prompt.
-- **Model Architecture:** Implements a text classification model using deep learning layers, such as `nn.Embedding`, `nn.LSTM`, and `nn.Linear`. More advanced architectures, including pre-trained models like BERT, are also supported.
-- **Training and Evaluation:** Supports hyperparameter tuning, detailed metric calculation, and visualization of results.
-- **Embeddings and Visualization:** Generates text embeddings, applies dimensionality reduction, and visualizes data with target labels in 2D space.
+Key features include:  
+- Efficient handling of text data using embedding layers.  
+- Deep learning architecture with stacked LSTM layers for robust temporal dependency representation.  
+- Adaptive learning rate control with `ReduceLROnPlateau` for optimized training.  
+- Real-world evaluation using metrics like **Accuracy**, **Precision**, **Recall**, and **F1-score**.
 
-## Setup
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/agafonovvadim/sentiment-analysis-model.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd sentiment-analysis-model
-   ```
-3. Install the dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+---
 
-## Usage
-1. **Prepare the dataset:**
-   - Add your dataset files to the `data/` directory.
-   - For datasets without labels, generate targets using an LLM:
-     - Write a detailed prompt explaining the task (e.g., "Classify the sentiment of the following reviews as positive or negative...").
-     - Use the LLM to annotate the dataset.
-     - Save the labeled dataset in the `data/processed/` directory.
+## Features  
+1. **Two-Layer LSTM Architecture**:  
+   - Enhanced temporal representation by stacking LSTMs.  
+   - Dropout for regularization to reduce overfitting.  
 
-   - Run the preprocessing script:
-     ```bash
-     python preprocess.py
-     ```
+2. **Dynamic Learning Rate Control**:  
+   - `ReduceLROnPlateau` to adjust learning rate when validation loss stagnates.  
 
-2. **Train the model:**
-   ```bash
-   python train.py
-   ```
+3. **GPU Acceleration**:  
+   - Leverages TensorFlow’s GPU support for faster training.  
 
-3. **Evaluate the model:**
-   ```bash
-   python evaluate.py
-   ```
+4. **Comprehensive Metrics**:  
+   - Evaluates model performance with Accuracy, Precision, Recall, and F1-score.  
 
-4. **Generate predictions:**
-   ```bash
-   python predict.py --text "Your text for sentiment analysis"
-   ```
+5. **Scalable Dataset Support**:  
+   - Easily handles datasets with thousands of labeled reviews.
 
-5. **Visualize embeddings (optional):**
-   - Extract embeddings from the penultimate layer of the model.
-   - Use dimensionality reduction (e.g., PCA, t-SNE) to project embeddings into 2D.
-   - Plot the embeddings with colors representing the target labels.
+---
 
-## Future Enhancements
-- Add support for multilingual sentiment analysis.
-- Include real-time metrics visualization during training.
-- Integrate with more advanced architectures like Transformer models.
-- Develop an API for easy integration with external applications.
+## Dataset  
+The dataset consists of two CSV files:  
+- **positive.csv**: Contains approximately 5000 positive movie reviews.  
+- **negative.csv**: Contains approximately 5000 negative movie reviews.  
+
+Each row represents a single movie review in text form.
+
+---
+
+## Requirements  
+
+- Python 3.7+  
+- TensorFlow 2.7+  
+- NumPy  
+- Pandas  
+- Scikit-learn  
+
+---
+
+## Usage  
+
+### **1. Prepare the Dataset**  
+Place the `positive.csv` and `negative.csv` files in the `dataset/` directory.  
+
+### **2. Train the Model**  
+Run the training file step-by-step:  
+```bash
+python predict.py
+```
+
+### **3. Evaluate the Model**  
+The script outputs the following metrics on the test set:  
+- Accuracy  
+- Precision  
+- Recall  
+- F1-score  
+
+Example output:  
+```plaintext
+Accuracy: 0.9214
+Precision: 0.9158
+Recall: 0.9300
+F1-score: 0.9229
+```
+
+### **4. Save the Model**  
+You could save the trained model as `sentiment_model.h5` for future use.  
+
+
+---
+
+## Model Architecture  
+
+- **Embedding Layer**: Converts text into dense vectors.  
+- **LSTM Layers**: Captures temporal dependencies in text.  
+- **Dense Layer**: Outputs the binary classification result.  
+
+---
+
+## Key Results  
+
+Training over 100 epochs resulted in the following metrics:  
+
+| Metric       | Score    |  
+|--------------|----------|  
+| Accuracy     | 0.9214   |  
+| Precision    | 0.9158   |  
+| Recall       | 0.9300   |  
+| F1-score     | 0.9229   |  
+
+---
+
+## Future Improvements  
+
+1. **Use Pretrained Embeddings**: Incorporate GloVe or FastText embeddings for better text representation.  
+2. **Data Augmentation**: Introduce techniques like back translation to expand the dataset.  
+3. **Transformer Architecture**: Explore models like BERT or GPT for more sophisticated text processing.  
+4. **Class Imbalance Handling**: If class distribution is unequal, apply SMOTE or weighted loss functions.  
+
+---
 
 ## License
 This project is licensed under the [GNU General Public License v3.0](LICENSE).
 
-## Contact
-For questions or suggestions, feel free to reach out via email: [agafonovvadim@niuitmo.ru](mailto:your.email@example.com).
+---
+
+## Acknowledgments  
+
+Special thanks to **TensorFlow** and **Scikit-learn** for providing robust libraries to streamline model development and evaluation.  
