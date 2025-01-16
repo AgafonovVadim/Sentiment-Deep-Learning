@@ -32,8 +32,8 @@ Key features include:
 
 ## Dataset  
 The dataset consists of two CSV files:  
-- **positive.csv**: Contains approximately 5000 positive movie reviews.  
-- **negative.csv**: Contains approximately 5000 negative movie reviews.  
+- **positive.csv**: Contains 7000 positive movie reviews.  
+- **negative.csv**: Contains 7000 negative movie reviews.  
 
 Each row represents a single movie review in text form.
 
